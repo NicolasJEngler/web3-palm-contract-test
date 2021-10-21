@@ -3,8 +3,8 @@ import './App.css';
 import Web3 from 'web3';
 import WalletService from './services/WalletService';
 
-// This could be taken from Etherscan https://explorer.palm-uat.xyz/address/0xA0931d84d4e242C55C308C9D558588A6a7b84743 once the contract is verified, resulting JSON should be placed inside the "ABIs" folder with the name "mint.json", then should be imported (L7) and instantiated (L53)
-// import contractABI from './ABIs/mint.json'
+// This could be taken from Etherscan https://explorer.palm-uat.xyz/address/0xA0931d84d4e242C55C308C9D558588A6a7b84743 once the contract is verified, resulting file should be placed inside the "ABIs" folder with the name "casablanca-paris.json", then should be imported (L7) and instantiated (L53)
+import contractABI from './ABIs/casablanca-paris.json'
 
 function App() {
   const [walletAddress, setWalletAddress] = useState(null),
@@ -50,7 +50,7 @@ function App() {
 
   // Check https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html
   // Here we set up a contract interface to interact with, requires an ABI and a contract address
-  // const contract = new web3.eth.Contract(contractABI, '0xA0931d84d4e242C55C308C9D558588A6a7b84743');
+  const contract = new web3.eth.Contract(contractABI, '0xA0931d84d4e242C55C308C9D558588A6a7b84743');
 
   // Roles:
   // - Admin: Can grant and revoke roles, also has the ability to define the 'vault_address'
@@ -69,28 +69,28 @@ function App() {
   // - setRedemption(uint256 tokenId): Changes the state of a token to 'redeemed' (Can not be rolled back)
 
   // We create a mint function to call from our front-end which then calls the mint function in the contract
-  /* const mint = (tokenURI, redeemable) => {
+  const mint = (tokenURI, redeemable) => {
     contract.methods.mint(tokenURI, redeemable)
       .send({
         from: walletAddress
       });
-  }; */
+  };
 
   // We create a function to set the vault address from our front-end which then calls the same function in the contract
-  /* const setVaultAddress = (vaultWalletAddress) => {
+  const setVaultAddress = (vaultWalletAddress) => {
     contract.methods.setVaultAddress(vaultWalletAddress)
       .send({
         from: walletAddress
       });
-  }; */
+  };
 
   // We create a function to toggle the redeemed status of tokenID 1 to true, which will then do the same at a contract level
-  /* const setRedemption = (tokenID) => {
+  const setRedemption = (tokenID) => {
     contract.methods.setRedemption(tokenID)
       .send({
         from: walletAddress
       });
-  }; */
+  };
 
   /*
    * useEffect() hooks section ⬇️ 
